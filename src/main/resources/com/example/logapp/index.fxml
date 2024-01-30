@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logapp.UIController">
+    <padding>
+        <Insets bottom="20" left="10" right="20" top="20" />
+    </padding>
+
+    <Label text="Select Input File:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="filePathField" minWidth="300" promptText="Selected files will be displayed here" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Button onAction="#browseFiles" text="Browse Files" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Select Output Folder:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="outputFolderField" promptText="Selected folder will be displayed here" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Button onAction="#browseFolder" text="Browse Folder" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+    <Label text="Search Parameter" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+
+    <Label text="Include:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <TextField fx:id="includeField" promptText="Enter word to include" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+
+    <Label text="Exclude:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <TextField fx:id="excludeField" promptText="Enter word to exclude" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+    <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+
+    <Label text="End Date:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+    <CheckBox fx:id="singleFileCheckbox" text="Generate single output file" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+
+    <Button onAction="#analyze" text="Analyze" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+
+    <Label fx:id="statusLabel" text="" GridPane.rowIndex="12" />
+
+
+   <FlowPane GridPane.rowIndex="8">
+      <children>
+          <DatePicker fx:id="startDatePicker"  />
+         <ChoiceBox fx:id="startHourChoiceBox" prefWidth="50.0" />
+         <ChoiceBox fx:id="startMinuteChoiceBox"  prefWidth="50.0" />
+      </children>
+   </FlowPane>
+   <FlowPane prefHeight="0.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <children>
+          <DatePicker fx:id="endDatePicker" />
+         <ChoiceBox fx:id="endHourChoiceBox"  prefWidth="50.0" />
+         <ChoiceBox fx:id="endMinuteChoiceBox"   prefWidth="50.0" />
+      </children>
+   </FlowPane>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+    </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+
+
+
+
+
+
+</GridPane>
