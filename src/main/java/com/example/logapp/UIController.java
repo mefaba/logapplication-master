@@ -138,8 +138,8 @@ public class UIController {
         }
 
         // Validate date range
-        if (startDate.isAfter(endDate)) {
-            statusLabel.setText("Error: Start date cannot be after end date.");
+        if (startDateTime.isAfter(endDateTime) || startDateTime.isEqual(endDateTime)) {
+            statusLabel.setText("Error: End date must be after start date.");
             return;
         }
         // Process log entries
