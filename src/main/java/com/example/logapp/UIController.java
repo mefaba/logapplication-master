@@ -54,9 +54,6 @@ public class UIController {
     @FXML
     private Label statusLabel;
 
-
-
-
     @FXML
     private void initialize() {
         // Initialize any additional setup if needed
@@ -135,14 +132,14 @@ public class UIController {
         //validate filePathField
         for (String selectedFile : selectedFilesArray) {
             if (!isValidFile(selectedFile)) {
-                statusLabel.setText("Invalid input file path");
+                statusLabel.setText("Error: Invalid input file path");
                 return;
             }
         }
 
         //validate outputFolder field
         if (!isValidDirectory(outputFolder)) {
-            statusLabel.setText("Invalid output folder path");
+            statusLabel.setText("Error: Invalid output folder path");
             return;
         }
 
@@ -151,6 +148,7 @@ public class UIController {
             statusLabel.setText("Error: End date must be after start date.");
             return;
         }
+
         // Process log entries
         if(singleFileCheckbox.isSelected())
         {
@@ -169,7 +167,7 @@ public class UIController {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    statusLabel.setText("Error processing log entries.");
+                    statusLabel.setText("Error: processing log entries.");
                 }
             }
         }
@@ -190,7 +188,7 @@ public class UIController {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    statusLabel.setText("Error processing log entries.");
+                    statusLabel.setText("Error: processing log entries.");
                 }
             }
         }
