@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 public class LogController {
     /**
@@ -29,12 +31,44 @@ public class LogController {
         List<String> resultEntries = new ArrayList<>();
 
         try {
+            String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+            // Define your regex pattern
+            String regex = "\\[.*].*\\n(?=\\[.*])";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(fileContent);
+
+            // Find and process all matches
+            /*while (matcher.find()) {
+                // Extract information from the matched log entry
+                String line = matcher.group();
+                String[] parts = line.split(",");
+                if(parts.length < 1)
+                {
+                    continue;
+                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'['yyyy-MM-dd'T'HH:mm:ss.SSSZ']'");
+                String logDateStr = parts[1];
+                LocalDateTime logDate = LocalDateTime.parse(logDateStr,formatter);
+
+                if ((includeTerm.isEmpty() || line.contains(includeTerm)) &&
+                        (excludeTerm.isEmpty() || !line.contains(excludeTerm)) && isDateInRange(logDate, startDate, endDate)) {
+                    resultEntries.add(line);
+                }
+                // Process the captured groups as needed
+
+                // Set the start position for the next search
+                int nextSearchStartPosition = matcher.end();
+                matcher.region(nextSearchStartPosition, fileContent.length());
+            }*/
             Stream<String> lines = Files.lines(Paths.get(filePath));
 
             for (String line : lines.toList()) {
                 String[] parts = line.split(",");
-                if(parts.length < 3)
+                if(parts.length < 1)
                 {
+                    continue;
+                }
+                if(!parts[0].matches("\\[[a-zA-Z]*]")){
                     continue;
                 }
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'['yyyy-MM-dd'T'HH:mm:ss.SSSZ']'");
@@ -47,6 +81,7 @@ public class LogController {
                 }
 
             }
+
         }
         catch (Exception e){
             e.printStackTrace();
