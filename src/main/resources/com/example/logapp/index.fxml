@@ -33,7 +33,7 @@
 
     <Button onAction="#analyze" text="Analyze" GridPane.columnIndex="0" GridPane.rowIndex="10" />
 
-    <Label fx:id="statusLabel" text="" GridPane.rowIndex="12" />
+    <Label fx:id="statusLabel" GridPane.rowIndex="12" />
 
 
     <FlowPane GridPane.rowIndex="8">

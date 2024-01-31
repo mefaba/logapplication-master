@@ -75,7 +75,7 @@ public class UIController {
         // Set default values or prompt texts
         startHourChoiceBox.getSelectionModel().selectFirst(); // Select the first item as default
         startMinuteChoiceBox.getSelectionModel().selectFirst();
-        endHourChoiceBox.getSelectionModel().selectFirst(); // Select the first item as default
+        endHourChoiceBox.getSelectionModel().selectFirst();
         endMinuteChoiceBox.getSelectionModel().selectFirst();
         startDatePicker.setValue(LocalDate.now());
         endDatePicker.setValue(LocalDate.now());

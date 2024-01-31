@@ -18,7 +18,7 @@ public class LogController {
             Stream<String> lines = Files.lines(Paths.get(filePath));
 
             for (String line : lines.toList()) {
-                String[] parts = line.split(","); // Assuming there are 6 parts in each log entry
+                String[] parts = line.split(",");
                 if(parts.length < 3)
                 {
                     continue;
