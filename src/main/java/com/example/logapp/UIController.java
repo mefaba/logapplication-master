@@ -8,6 +8,9 @@ import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -119,6 +122,21 @@ public class UIController {
         LocalTime endTime = LocalTime.of(endHourChoiceBox.getValue(), endMinuteChoiceBox.getValue());
         LocalDateTime endDateTime = LocalDateTime.of(endDate,endTime);
 
+        //validate filePathField
+        for (String selectedFile : selectedFilesArray) {
+            if (!isValidFile(selectedFile)) {
+                statusLabel.setText("Invalid input file path");
+                return;
+            }
+        }
+
+
+        //validate outputFolder field
+        if (!isValidDirectory(outputFolder)) {
+            statusLabel.setText("Invalid output folder path");
+            return;
+        }
+
         // Validate date range
         if (startDate.isAfter(endDate)) {
             statusLabel.setText("Error: Start date cannot be after end date.");
@@ -181,5 +199,16 @@ public class UIController {
                 return Integer.parseInt(string);
             }
         };
+    }
+
+
+    private boolean isValidDirectory(String path) {
+        Path directoryPath = Paths.get(path);
+        return !path.isEmpty() && Files.isDirectory(directoryPath) && Files.isWritable(directoryPath);
+    }
+
+    private boolean isValidFile(String path) {
+        Path filePath = Paths.get(path);
+        return Files.isRegularFile(filePath) && Files.isReadable(filePath);
     }
 }
