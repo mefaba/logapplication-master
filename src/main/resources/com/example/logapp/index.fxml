@@ -36,20 +36,16 @@
     <Label fx:id="statusLabel" text="" GridPane.rowIndex="12" />
 
 
-   <FlowPane GridPane.rowIndex="8">
-      <children>
-          <DatePicker fx:id="startDatePicker"  />
-         <ChoiceBox fx:id="startHourChoiceBox" prefWidth="50.0" />
-         <ChoiceBox fx:id="startMinuteChoiceBox"  prefWidth="50.0" />
-      </children>
-   </FlowPane>
-   <FlowPane prefHeight="0.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
-      <children>
-          <DatePicker fx:id="endDatePicker" />
-         <ChoiceBox fx:id="endHourChoiceBox"  prefWidth="50.0" />
-         <ChoiceBox fx:id="endMinuteChoiceBox"   prefWidth="50.0" />
-      </children>
-   </FlowPane>
+    <FlowPane GridPane.rowIndex="8">
+        <DatePicker fx:id="startDatePicker"/>
+        <ChoiceBox fx:id="startHourChoiceBox" prefWidth="50.0"/>
+        <ChoiceBox fx:id="startMinuteChoiceBox" prefWidth="50.0"/>
+    </FlowPane>
+    <FlowPane prefHeight="0.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+        <DatePicker fx:id="endDatePicker"/>
+        <ChoiceBox fx:id="endHourChoiceBox" prefWidth="50.0"/>
+        <ChoiceBox fx:id="endMinuteChoiceBox" prefWidth="50.0"/>
+    </FlowPane>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />

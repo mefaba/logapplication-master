@@ -16,7 +16,6 @@ import java.util.List;
 public class UIController {
 
     private final LogController LogController = new LogController();
-
     @FXML
     private TextField filePathField;
 
@@ -25,8 +24,7 @@ public class UIController {
 
     @FXML
     private CheckBox singleFileCheckbox;
-    @FXML
-    private TextField searchField;
+
     @FXML
     private TextField includeField;
     @FXML
@@ -79,6 +77,8 @@ public class UIController {
         startMinuteChoiceBox.getSelectionModel().selectFirst();
         endHourChoiceBox.getSelectionModel().selectFirst(); // Select the first item as default
         endMinuteChoiceBox.getSelectionModel().selectFirst();
+        startDatePicker.setValue(LocalDate.now());
+        endDatePicker.setValue(LocalDate.now());
     }
 
     @FXML
@@ -120,7 +120,7 @@ public class UIController {
         LocalDateTime endDateTime = LocalDateTime.of(endDate,endTime);
 
         // Validate date range
-        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+        if (startDate.isAfter(endDate)) {
             statusLabel.setText("Error: Start date cannot be after end date.");
             return;
         }
@@ -135,8 +135,6 @@ public class UIController {
                     List<String> resultEntries = LogController.processLogEntries(selectedFile, includeTerm, excludeTerm, startDateTime, endDateTime);
                     // Output the result entries to a new log file
                     if (!resultEntries.isEmpty()) {
-                        String fileName = new File(selectedFile).getName();
-
                         LogController.appendResultToFile(resultEntries, outputFilePath);
                         statusLabel.setText("Result log files created at: " + outputFolder);
                     } else {
@@ -172,7 +170,7 @@ public class UIController {
     }
 
     private StringConverter<Integer> createZeroPadding() {
-        return new StringConverter<Integer>() {
+        return new StringConverter<>() {
             @Override
             public String toString(Integer object) {
                 return String.format("%02d", object);
