@@ -11,6 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 public class LogController {
+    /**
+     * Processes log entries from the specified file based on given parameters.
+     *
+     * This method reads log entries from the specified file, extracts relevant information,
+     * and filters entries based on inclusion/exclusion terms, and a specified date-time range.
+     *
+     * @param filePath      The path to the log file.
+     * @param includeTerm   The inclusion term for filtering log entries (empty for no inclusion filter).
+     * @param excludeTerm   The exclusion term for filtering log entries (empty for no exclusion filter).
+     * @param startDate     The start date-time for filtering log entries.
+     * @param endDate       The end date-time for filtering log entries.
+     * @return A list of log entries that match the specified criteria.
+     * @throws IOException If there is an error reading the log file.
+     */
     public List<String> processLogEntries(String filePath, String includeTerm, String excludeTerm, LocalDateTime startDate, LocalDateTime endDate) throws IOException {
         List<String> resultEntries = new ArrayList<>();
 
