@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 public class LogController {
@@ -17,14 +18,14 @@ public class LogController {
      * and filters entries based on inclusion/exclusion terms, and a specified date-time range.
      *
      * @param filePath      The path to the log file.
-     * @param includeTerm   The inclusion term for filtering log entries (empty for no inclusion filter).
-     * @param excludeTerm   The exclusion term for filtering log entries (empty for no exclusion filter).
+     * @param includeTerms   The inclusion terms for filtering log entries (empty for no inclusion filter).
+     * @param excludeTerms   The exclusion terms for filtering log entries (empty for no exclusion filter).
      * @param startDate     The start date-time for filtering log entries.
      * @param endDate       The end date-time for filtering log entries.
      * @return A list of log entries that match the specified criteria.
      * @throws IOException If there is an error reading the log file.
      */
-    public List<String> processLogEntries(String filePath, String includeTerm, String excludeTerm, LocalDateTime startDate, LocalDateTime endDate) throws IOException {
+    public List<String> processLogEntries(String filePath, String[] includeTerms, String[] excludeTerms, LocalDateTime startDate, LocalDateTime endDate) throws IOException {
         List<String> resultEntries = new ArrayList<>();
 
         try{
@@ -47,8 +48,8 @@ public class LogController {
                 String logDateStr = parts[1];
                 LocalDateTime logDate = LocalDateTime.parse(logDateStr,formatter);
 
-                if ((includeTerm.isEmpty() || line.contains(includeTerm)) &&
-                        (excludeTerm.isEmpty() || !line.contains(excludeTerm)) && isDateInRange(logDate, startDate, endDate)) {
+                if ((Arrays.stream(includeTerms).anyMatch(term -> line.contains(term))) &&
+                        (Arrays.stream(excludeTerms).anyMatch(term -> line.contains(term))) && isDateInRange(logDate, startDate, endDate)) {
                     isParentLogActive = true;
                     resultEntries.add(line);
                 }else {

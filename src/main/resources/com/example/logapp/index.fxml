@@ -19,10 +19,10 @@
     <Label text="Search Parameter" GridPane.columnIndex="0" GridPane.rowIndex="4" />
 
     <Label text="Include:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-    <TextField fx:id="includeField" promptText="Enter word to include" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <TextField fx:id="includeField" promptText="Enter word to include. example: [ERROR], [INFO]" GridPane.columnIndex="0" GridPane.rowIndex="6" />
 
     <Label text="Exclude:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <TextField fx:id="excludeField" promptText="Enter word to exclude" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <TextField fx:id="excludeField" promptText="Enter word to exclude. example: system, OnDeviceJobQueueAppender" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
     <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
 

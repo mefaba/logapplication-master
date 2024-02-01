@@ -118,8 +118,8 @@ public class UIController {
      * @throws IOException If there is an error processing log entries or writing result files.
      */
     private void analyze() {
-        String includeTerm = includeField.getText();
-        String excludeTerm = excludeField.getText();
+        String[] includeTerms = includeField.getText().split(", ");
+        String[] excludeTerms = includeField.getText().split(", ");
         String outputFolder = outputFolderField.getText();
         String[] selectedFilesArray = filePathField.getText().split(", ");  // Assuming files are separated by ','
         LocalDate startDate = startDatePicker.getValue();
@@ -157,7 +157,7 @@ public class UIController {
             for(String selectedFile: selectedFilesArray)
             {
                 try {
-                    List<String> resultEntries = LogController.processLogEntries(selectedFile, includeTerm, excludeTerm, startDateTime, endDateTime);
+                    List<String> resultEntries = LogController.processLogEntries(selectedFile, includeTerms, excludeTerms, startDateTime, endDateTime);
                     // Output the result entries to a new log file
                     if (!resultEntries.isEmpty()) {
                         LogController.appendResultToFile(resultEntries, outputFilePath);
@@ -176,7 +176,7 @@ public class UIController {
             for(String selectedFile: selectedFilesArray)
             {
                 try {
-                    List<String> resultEntries = LogController.processLogEntries(selectedFile, includeTerm, excludeTerm, startDateTime, endDateTime);
+                    List<String> resultEntries = LogController.processLogEntries(selectedFile, includeTerms, excludeTerms, startDateTime, endDateTime);
                     // Output the result entries to a new log file
                     if (!resultEntries.isEmpty()) {
                         String fileName = new File(selectedFile).getName();
