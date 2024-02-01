@@ -161,7 +161,7 @@ public class UIController {
                     // Output the result entries to a new log file
                     if (!resultEntries.isEmpty()) {
                         LogController.appendResultToFile(resultEntries, outputFilePath);
-                        statusLabel.setText("Result log files created at: " + outputFolder);
+                        statusLabel.setText("Result log files created at: " + outputFilePath);
                     } else {
                         statusLabel.setText("No matching entries found.");
                     }
@@ -182,7 +182,7 @@ public class UIController {
                         String fileName = new File(selectedFile).getName();
                         String outputFilePath = outputFolder + File.separator + "result_" + fileName;
                         LogController.writeResultToFile(resultEntries, outputFilePath);
-                        statusLabel.setText("Result log file created at: " + outputFilePath);
+                        statusLabel.setText("Result log file created at: " + outputFolder);
                     } else {
                         statusLabel.setText("No matching entries found.");
                     }

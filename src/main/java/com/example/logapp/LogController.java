@@ -29,14 +29,14 @@ public class LogController {
 
         try{
             Stream<String> lines = Files.lines(Paths.get(filePath));
-            boolean isLogAdded = false;
+            boolean isParentLogActive = false;
 
             for (String line : lines.toList()) {
                 String[] parts;
-                if (line.matches("\\[[a-zA-Z]*].*")) {
+                if (line.matches("\\[\\w*\\s*].*")) {
                     parts = line.split(",");
                 }
-                else if(isLogAdded){
+                else if(isParentLogActive){
                     resultEntries.add(line);
                     continue;
                 }else{
@@ -49,10 +49,10 @@ public class LogController {
 
                 if ((includeTerm.isEmpty() || line.contains(includeTerm)) &&
                         (excludeTerm.isEmpty() || !line.contains(excludeTerm)) && isDateInRange(logDate, startDate, endDate)) {
-                    isLogAdded = true;
+                    isParentLogActive = true;
                     resultEntries.add(line);
                 }else {
-                    isLogAdded = false;
+                    isParentLogActive = false;
                 }
             }
         }
