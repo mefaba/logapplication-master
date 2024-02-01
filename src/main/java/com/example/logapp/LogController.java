@@ -1,19 +1,18 @@
 package com.example.logapp;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 public class LogController {
     /**
      * Processes log entries from the specified file based on given parameters.
-     *
      * This method reads log entries from the specified file, extracts relevant information,
      * and filters entries based on inclusion/exclusion terms, and a specified date-time range.
      *
@@ -34,7 +33,7 @@ public class LogController {
 
             for (String line : lines.toList()) {
                 String[] parts;
-                if (line.matches("\\[[a-zA-Z]*\\].*")) {
+                if (line.matches("\\[[a-zA-Z]*].*")) {
                     parts = line.split(",");
                 }
                 else if(isLogAdded){
