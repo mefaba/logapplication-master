@@ -60,8 +60,6 @@ public class LogController {
         {
             e.printStackTrace();
         }
-
-        System.out.println(resultEntries.size());
         return resultEntries;
     }
 
