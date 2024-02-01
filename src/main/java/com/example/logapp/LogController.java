@@ -1,8 +1,6 @@
 package com.example.logapp;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -30,62 +28,40 @@ public class LogController {
     public List<String> processLogEntries(String filePath, String includeTerm, String excludeTerm, LocalDateTime startDate, LocalDateTime endDate) throws IOException {
         List<String> resultEntries = new ArrayList<>();
 
-        try {
-            String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-            // Define your regex pattern
-            String regex = "\\[.*].*\\n(?=\\[.*])";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(fileContent);
-
-            // Find and process all matches
-            /*while (matcher.find()) {
-                // Extract information from the matched log entry
-                String line = matcher.group();
-                String[] parts = line.split(",");
-                if(parts.length < 1)
-                {
-                    continue;
-                }
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'['yyyy-MM-dd'T'HH:mm:ss.SSSZ']'");
-                String logDateStr = parts[1];
-                LocalDateTime logDate = LocalDateTime.parse(logDateStr,formatter);
-
-                if ((includeTerm.isEmpty() || line.contains(includeTerm)) &&
-                        (excludeTerm.isEmpty() || !line.contains(excludeTerm)) && isDateInRange(logDate, startDate, endDate)) {
-                    resultEntries.add(line);
-                }
-                // Process the captured groups as needed
-
-                // Set the start position for the next search
-                int nextSearchStartPosition = matcher.end();
-                matcher.region(nextSearchStartPosition, fileContent.length());
-            }*/
+        try{
             Stream<String> lines = Files.lines(Paths.get(filePath));
+            boolean isLogAdded = false;
 
             for (String line : lines.toList()) {
-                String[] parts = line.split(",");
-                if(parts.length < 1)
-                {
+                String[] parts;
+                if (line.matches("\\[[a-zA-Z]*\\].*")) {
+                    parts = line.split(",");
+                }
+                else if(isLogAdded){
+                    resultEntries.add(line);
+                    continue;
+                }else{
                     continue;
                 }
-                if(!parts[0].matches("\\[[a-zA-Z]*]")){
-                    continue;
-                }
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'['yyyy-MM-dd'T'HH:mm:ss.SSSZ']'");
                 String logDateStr = parts[1];
                 LocalDateTime logDate = LocalDateTime.parse(logDateStr,formatter);
 
                 if ((includeTerm.isEmpty() || line.contains(includeTerm)) &&
                         (excludeTerm.isEmpty() || !line.contains(excludeTerm)) && isDateInRange(logDate, startDate, endDate)) {
+                    isLogAdded = true;
                     resultEntries.add(line);
+                }else {
+                    isLogAdded = false;
                 }
-
             }
-
         }
-        catch (Exception e){
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
+
         System.out.println(resultEntries.size());
         return resultEntries;
     }
