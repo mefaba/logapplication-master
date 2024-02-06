@@ -119,7 +119,7 @@ public class UIController {
      */
     private void analyze() {
         String[] includeTerms = includeField.getText().split(", ");
-        String[] excludeTerms = includeField.getText().split(", ");
+        String[] excludeTerms = excludeField.getText().split(", ");
         String outputFolder = outputFolderField.getText();
         String[] selectedFilesArray = filePathField.getText().split(", ");  // Assuming files are separated by ','
         LocalDate startDate = startDatePicker.getValue();
